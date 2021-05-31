@@ -55,3 +55,11 @@
 
 ## 演習問題
 
+### 基本的なCRUDの問題
+
+- 上記とテキストを参考に`ItemRepository.java`と`ItemRepository.xml`を更新してレコードを1件登録する処理を実装してください
+  - 登録の確認は`ItemRepositoryTest.java`にテストケースを作り確認してください。
+- 上記とテキストを参考に`ItemRepository.java`と`ItemRepository.xml`を更新してレコードを1件更新する処理を実装してください
+  - 更新の確認は`ItemRepositoryTest.java`にテストケースを作り確認してください。
+- 上記とテキストを参考に`ItemRepository.java`と`ItemRepository.xml`を更新してレコードを1件削除する処理を実装してください
+  - 削除の確認は`ItemRepositoryTest.java`にテストケースを作り確認してください。
