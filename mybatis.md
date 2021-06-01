@@ -56,7 +56,7 @@ DB接続情報を設定します。`src/main/resources`の中にある`applicati
 ### Entityの作成
 
 DBのテーブルの1レコード分を格納するためのEntityクラスを作成します。
-今回は`Item`テーブルのデータを格納する`Item.java`クラスを`com.example.entity`パッケージの中に作成して、下図のようにテーブルのカラムに合わせてフィールドを定義します。
+今回は`Item`テーブルのデータを格納する`Item.java`クラスを`com.example.demo.entity`パッケージの中に作成して、下図のようにテーブルのカラムに合わせてフィールドを定義します。
 
 ![](img/mybatis-03.png)
 
