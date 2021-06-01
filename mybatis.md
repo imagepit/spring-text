@@ -102,6 +102,9 @@ XMLファイルの中に`<select>`タグで囲った部分を作り、その中�
 Spring Bootでは`src/main/resources`の配下に初期化するSQLファイルを用意しておけば、テスト実行毎に初期化して実行する事ができます。
 
 `src/main/resources`に`sql`フォルダを作成して`data.sql`を作成します。
+
+![](img/mybatis-test-data.png)
+
 `data.sql`の中身は下記のようにしてください。
 
 ```sql
