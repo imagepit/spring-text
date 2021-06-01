@@ -97,6 +97,65 @@ XMLファイルの中に`<select>`タグで囲った部分を作り、その中�
 
 ![](img/mybatis-08.png)
 
+### DBの初期データの用意
+
+Spring Bootでは`src/main/resources`の配下に初期化するSQLファイルを用意しておけば、テスト実行毎に初期化して実行する事ができます。
+
+`src/main/resources`に`sql`フォルダを作成して`data.sql`を作成します。
+`data.sql`の中身は下記のようにしてください。
+
+```sql
+drop table if exists item;
+drop table if exists item_category;
+
+create table item_category(
+  id serial primary key,
+  name character varying(20)
+);
+
+create table item(
+  id serial primary key,
+  name character varying(30),
+  price integer,
+  category_id integer references item_category(id)
+);
+
+/* 商品カテゴリ */
+insert into item_category values(nextval('item_category_id_seq'),'文房具');
+insert into item_category values(nextval('item_category_id_seq'),'雑貨');
+insert into item_category values(nextval('item_category_id_seq'),'パソコン周辺機器');
+
+/* 商品 */
+insert into item values(nextval('item_id_seq'),'水性ボールペン(黒)',120,1);
+insert into item values(nextval('item_id_seq'),'水性ボールペン(赤)',120,1);
+insert into item values(nextval('item_id_seq'),'水性ボールペン(青)',120,1);
+insert into item values(nextval('item_id_seq'),'油性ボールペン(黒)',100,1);
+insert into item values(nextval('item_id_seq'),'油性ボールペン(赤)',100,1);
+insert into item values(nextval('item_id_seq'),'油性ボールペン(青)',100,1);
+insert into item values(nextval('item_id_seq'),'蛍光ペン(黄)',130,1);
+insert into item values(nextval('item_id_seq'),'蛍光ペン(赤)',130,1);
+insert into item values(nextval('item_id_seq'),'蛍光ペン(青)',130,1);
+insert into item values(nextval('item_id_seq'),'蛍光ペン(緑)',130,1);
+insert into item values(nextval('item_id_seq'),'鉛筆(黒)',100,1);
+insert into item values(nextval('item_id_seq'),'鉛筆(赤)',100,1);
+insert into item values(nextval('item_id_seq'),'色鉛筆(12色)',400,1);
+insert into item values(nextval('item_id_seq'),'色鉛筆(48色)',1300,1);
+insert into item values(nextval('item_id_seq'),'レザーネックレス',300,2);
+insert into item values(nextval('item_id_seq'),'ワンタッチ開閉傘',3000,2);
+insert into item values(nextval('item_id_seq'),'金魚風呂敷',500,2);
+insert into item values(nextval('item_id_seq'),'折畳トートバッグ',600,2);
+insert into item values(nextval('item_id_seq'),'アイマスク',900,2);
+insert into item values(nextval('item_id_seq'),'防水スプレー',500,2);
+insert into item values(nextval('item_id_seq'),'キーホルダ',800,2);
+insert into item values(nextval('item_id_seq'),'ワイヤレスマウス',900,3);
+insert into item values(nextval('item_id_seq'),'ワイヤレストラックボール',1300,3);
+insert into item values(nextval('item_id_seq'),'有線光学式マウス',500,3);
+insert into item values(nextval('item_id_seq'),'光学式ゲーミングマウス',4800,3);
+insert into item values(nextval('item_id_seq'),'有線ゲーミングマウス',3800,3);
+insert into item values(nextval('item_id_seq'),'USB有線式キーボード',1400,3);
+insert into item values(nextval('item_id_seq'),'無線式キーボード',1900,3);
+```
+
 ### テストクラスの作成
 
 これでとりあえず全件取得の処理はできるようになりましたので、テストクラスを作って動作確認してみます。
@@ -105,8 +164,8 @@ XMLファイルの中に`<select>`タグで囲った部分を作り、その中�
 
 - `@Mapper`アノテーションを付与した`ItemRepository`インターフェース型の変数を用意し、`@Autowired`でインジェクション対象にします
   - これでMybatisとSpring FrameworkのDIでDB操作インスタンスが注入されます。
-- 今回テストケースではアサーションメソッドを入れていません。
-  - とりあえずメソッドを実行して繰り返し処理でレコードが出力しているかを確認しているのみです
+- `@Sql`アノテーションにてテスト実行前に初期化するSQLファイルを指定しています。
+  - これにより再帰的にDBのテストを実行させる事が可能です。
 
 ![](img/mybatis-09.png)
 
@@ -116,11 +175,23 @@ JUnitテストを実行すると下図のようにコンソールにDBテーブ�
 
 ## 演習問題
 
-### 基本的なCRUDの問題
+### 1件取得
+
+- 上記とテキストを参考に`ItemRepository.java`と`ItemRepository.xml`を更新してItemテーブルのレコードをIDを指定して1件取得する処理を実装してください
+  - 取得の確認は`ItemRepositoryTest.java`にテストケースを作り確認してください。
+
+### 1件登録
 
 - 上記とテキストを参考に`ItemRepository.java`と`ItemRepository.xml`を更新してレコードを1件登録する処理を実装してください
   - 登録の確認は`ItemRepositoryTest.java`にテストケースを作り確認してください。
+  - 登録処理時のIDはPostgreSQLのシーケンスを使って登録してください（テキストの60ページ参照）
+
+### 1件更新
+
 - 上記とテキストを参考に`ItemRepository.java`と`ItemRepository.xml`を更新してレコードを1件更新する処理を実装してください
   - 更新の確認は`ItemRepositoryTest.java`にテストケースを作り確認してください。
+
+### 1件削除
+
 - 上記とテキストを参考に`ItemRepository.java`と`ItemRepository.xml`を更新してレコードを1件削除する処理を実装してください
   - 削除の確認は`ItemRepositoryTest.java`にテストケースを作り確認してください。
