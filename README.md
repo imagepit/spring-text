@@ -60,6 +60,10 @@
 - [eclipseにlombok.jarの登録](eclipse-lombok-install.md)
 - [eclipseにSpring Bootプロジェクト作成](new-spring-project.md)
 
+### lombok
+
+- [lombokの使い方](lombok-usage.md)
+
 ### DI
 
 - [DIの動作確認・演習](di.md)
