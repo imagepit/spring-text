@@ -2,6 +2,13 @@
 
 ## 環境構築
 
+### eclipseにEmmetプラグインの追加
+
+eclipseでHTMLのコーディングの生産性を上げるために、参考ページの手順でEmmetプラグインをいれておいてください。
+
+**参考ページ**
+
+https://blog.goo.ne.jp/siyokuanjin/e/43764761c736fe29f9a13cec6312e7be
 
 ### 依存関係の追加
 
