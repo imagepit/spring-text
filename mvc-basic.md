@@ -91,9 +91,9 @@ Spring MVCを利用するためには依存関係を追加する必要があり�
 
 ![](img/springmvc-practice-01.png)
 
-|クラス名（FQCN）|
-|---|
-|`com.example.demo.controller.Practice01Controller`|
+クラス名（FQCN）|アノテーション
+---|---
+`com.example.demo.controller.Practice01Controller`|`@Controller`、`@RequestMapping`
 
 画面名|メソッド名|アノテーション|戻り値
 ---|---|---|---
