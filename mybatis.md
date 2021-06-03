@@ -198,3 +198,9 @@ JUnitテストを実行すると下図のようにコンソールにDBテーブ�
 
 - 上記とテキストを参考に`ItemRepository.java`と`ItemRepository.xml`を更新してレコードを1件削除する処理を実装してください
   - 削除の確認は`ItemRepositoryTest.java`にテストケースを作り確認してください。
+
+## 追加演習
+
+`src/main/resource/sql/data.sql`に下記を追加してMybatisを使って基本的なCRUDを実装してください。
+
+![](img/mybatis-11.png)

@@ -1,6 +1,30 @@
 drop table if exists item;
 drop table if exists item_category;
 
+
+drop table if exists employee;
+drop table if exists department;
+create table department(
+  dept_no serial primary key,
+  dept_name varchar(100)
+);
+create table employee(
+  emp_no serial primary key,
+  emp_name varchar(100),
+  dept_no integer references department(dept_no)
+);
+insert into department values(nextval('department_dept_no_seq'),'営業部');
+insert into department values(nextval('department_dept_no_seq'),'企画部');
+insert into department values(nextval('department_dept_no_seq'),'システム部');
+insert into employee values(nextval('employee_emp_no_seq'),'高橋',1);
+insert into employee values(nextval('employee_emp_no_seq'),'田中',2);
+insert into employee values(nextval('employee_emp_no_seq'),'加藤',3);
+
+
+
+
+
+
 create table item_category(
   id serial primary key,
   name character varying(20)
