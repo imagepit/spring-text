@@ -100,4 +100,5 @@ Spring MVCを利用するためには依存関係を追加する必要があり�
 トップ画面|home|`@GetMapping`|practice01/home
 フォワード1画面|forward|`@GetMapping("forward")`|practice01/first
 フォワード2画面|second|`@GetMapping("second")`|practice01/second
-リダイレクト画面|redirect|`@GetMapping("redirect")`|redirect:/practice01/redirect
+リダイレクト|redirect|`@GetMapping("redirect")`|redirect:/practice01/redirect
+リダイレクト画面|redirected|`@GetMapping("redirected")`|practice01/redirected
