@@ -63,7 +63,7 @@
 
 `ValidationMessages.properties`にItemFormに付与したバリデーションアノテーション毎のエラーメッセージ内容を追加します。下記の内容を追加してください。
 
-1行ごとに`アノテーションのFQDN.message`のキーとそれに対応した日本語エラーメッセージを定義しています。
+1行ごとに`アノテーションのFQCN.message`のキーとそれに対応した日本語エラーメッセージを定義しています。
 - 値の`{0}`の箇所はアノテーションを付与したFormクラスのフィールド名が表示されます。（次の`messages.properties`でその名称を任意に変更できます。）
 
 _ValidationMessages.properties_

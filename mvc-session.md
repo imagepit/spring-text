@@ -80,6 +80,116 @@
 
 ## 演習問題
 
-
+下記の仕様の計算画面を構築せよ。
 
 ![](img/springmvc-session-12.png)
+
+### 演習回答例
+
+_com.example.demo.form.CalcForm.java_
+
+```java
+package com.example.demo.form;
+
+import java.io.Serializable;
+
+import lombok.Data;
+
+@Data
+public class CalcForm implements Serializable {
+	private Integer value1;
+	private Integer value2;
+}
+```
+
+_com.example.demo.controller.Practice02Controller.java_
+
+```java
+package com.example.demo.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+
+import com.example.demo.form.CalcForm;
+
+@SessionAttributes("calcForm")
+@RequestMapping("practice02")
+@Controller
+public class Practice02Controller {
+	@ModelAttribute("calcForm")
+	public CalcForm setup() {
+		return new CalcForm();
+	}
+
+	@GetMapping
+	public String form() {
+		return "practice02/form";
+	}
+
+	@PostMapping
+	public String confirm(@ModelAttribute("calcForm") CalcForm form, Model model) {
+		model.addAttribute("result",form.getValue1()+form.getValue2());
+		return "practice02/confirm";
+	}
+
+	@PostMapping("retain")
+	public String retain() {
+		return "redirect:/practice02";
+	}
+
+	@PostMapping("clear")
+	public String clear(SessionStatus sessionStatus) {
+		sessionStatus.setComplete();
+		return "redirect:/practice02";
+	}
+}
+```
+
+_src/main/resources/templates/practice02/form.html_
+
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>入力画面</title>
+</head>
+<body>
+	<h1>入力画面</h1>
+	<form action="/practice02" method="post" th:object="${calcForm}">
+		<input type="number" th:field="*{value1}" />
+		+
+		<input type="number" th:field="*{value2}" /><br>
+		<input type="submit" value="計算" />
+	</form>
+</body>
+</html>
+```
+
+_src/main/resources/templates/practice02/confirm.html_
+
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>計算結果</title>
+</head>
+<body>
+	<h1>計算結果</h1>
+	<p>答え=<span th:text="${result}"></span></p>
+	<form action="/practice02/retain" method="post">
+		<input type="submit" value="セッションを解除しないで戻る" />
+	</form>
+	<form action="/practice02/clear" method="post">
+		<input type="submit" value="セッションを解除しないで戻る" />
+	</form>
+</body>
+</html>
+```
