@@ -84,7 +84,7 @@
 
 ![](img/springmvc-session-12.png)
 
-### 演習回答例
+### 演習解答例
 
 _com.example.demo.form.CalcForm.java_
 
@@ -188,7 +188,7 @@ _src/main/resources/templates/practice02/confirm.html_
 		<input type="submit" value="セッションを解除しないで戻る" />
 	</form>
 	<form action="/practice02/clear" method="post">
-		<input type="submit" value="セッションを解除しないで戻る" />
+		<input type="submit" value="セッションを解除して戻る" />
 	</form>
 </body>
 </html>
