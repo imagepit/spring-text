@@ -84,3 +84,4 @@
 - [フォームの利用・確認](mvc-form.md)
 - [セッション（1つのコントローラー）の利用の確認](mvc-session.md)
 - [単項目バリデーションの実装](mvc-validate.md)
+- [相関バリデーションの実装](mvc-validate-multi.md)

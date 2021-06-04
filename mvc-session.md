@@ -77,3 +77,9 @@
 入力画面で入力内容が破棄された事を確認してください。
 
 ![](img/springmvc-session-11.png)
+
+## 演習問題
+
+
+
+![](img/springmvc-session-12.png)

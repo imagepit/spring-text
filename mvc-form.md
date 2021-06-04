@@ -74,9 +74,9 @@ HTMLのフォームから入力された内容を取り出してみます。
 
 ![](img/springmvc-form-10.png)
 
-|クラス名（FQCN）|
-|---|
-|`com.example.demo.controller.Practice02Controller`|
+|クラス名（FQCN）|アノテーション|
+|---|---|
+|`com.example.demo.controller.Practice02Controller`|`@RequestMapping("practice02")`
 
 画面名|メソッド名|アノテーション|戻り値
 ---|---|---|---
