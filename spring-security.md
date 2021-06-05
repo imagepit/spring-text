@@ -1,5 +1,9 @@
 # Spring Securityの動作確認
 
+## 処理の流れ
+
+![](img/spring-security-sequence.png)
+
 ## 環境構築
 
 ### テーブル定義ファイル作成
