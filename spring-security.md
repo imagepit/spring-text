@@ -33,8 +33,9 @@
 
 ![](img/spring-security-09.png)
 
-
 ### Serviceのテスト
+
+- **AccountServiceTest.java**を実行して暗号化されたパスワードでユーザを登録している状態にしておいてください。
 
 ![](img/spring-security-10.png)
 
