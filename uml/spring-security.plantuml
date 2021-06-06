@@ -1,0 +1,44 @@
+@startuml
+title Spring Securityの認証・認可の流れ
+skinparam shadowing false
+hide footbox
+actor ユーザ
+activate ユーザ
+participant "Login\nController" as controller1
+participant "Menu\nController" as controller2
+participant "SpringSecurity\n（SecurityConfig）" as security
+participant "AccountUser\nDetailsService" as service
+participant "Account\nRepository" as repository
+participant "Account\nUserDetails" as userdetail
+database DB
+ユーザ -> controller1 : login()
+activate controller1
+controller1 --> ユーザ : ログイン画面
+deactivate controller1
+ユーザ -> security : /auth POST(username,password)
+activate security
+security -> service : loadUserByUsername\n(username)
+activate service
+service -> repository : selectByUserName\n(username)
+activate repository
+repository -> DB : SELECT文
+activate DB
+DB --> repository : Account
+deactivate DB
+repository --> service : Account
+deactivate repository
+service -> userdetail : new
+activate userdetail
+userdetail --> service : AccountUserDetails
+deactivate userdetail
+service --> security : AccountUserDetails
+deactivate service
+security -> security : 認証
+security -> security : セッションに格納
+security --> ユーザ : メニューへリダイレクト
+deactivate security
+ユーザ -> controller2 : menu()
+activate controller2
+controller2 -> ユーザ : メニュー画面
+deactivate controller2
+@enduml

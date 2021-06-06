@@ -1,0 +1,41 @@
+@startuml
+title サービスを使った3層モデルの処理の流れ
+hide footbox
+skinparam shadowing false
+
+actor ユーザ as user
+participant "Session\nController" as controller
+participant "Item\nForm" as form
+participant "Item\nHelper" as helper
+participant "Item\nService" as service
+participant "ItemCategory\nRepository" as repo2
+participant "Item\nRepository" as repo
+database db
+
+user -> controller+ : form()
+controller -> repo2+ : selectAll()
+repo2 -> db+ : SQL(SELECT)
+db --> repo2- : List<ItemCategorys>
+repo2 --> controller- : List<ItemCategorys>
+controller -> controller : Modelにセット
+controller --> user- : 入力画面
+user -> user : 商品入力
+user -> controller+ : confirm()
+controller -> form+ : 商品情報\nセット
+form --> controller- : ItemForm
+controller -> controller: バリデート
+controller --> user- : 確認画面
+user -> controller+ : execute()
+controller -> helper+ : convert(ItemForm)\nFormからEntityの変換
+helper --> controller- : Item
+controller -> service+ : addItem(Item)
+service -> repo+ : insert(Item)
+repo -> db+ : SQL(INSERT)
+db --> repo- : void
+repo --> service- : void
+service --> controller- : void
+controller --> user- : リダイレクト
+user -> controller+ : complete()
+controller -> controller : セッション破棄
+controller -> user- : 完了画面
+@enduml

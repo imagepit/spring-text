@@ -1,0 +1,24 @@
+@startuml
+title アカウント登録の流れ
+skinparam shadowing false
+hide footbox
+actor 開発者 as user
+participant "AccountService\nTest" as test
+participant "Account" as account
+participant "AccountService" as service
+participant "AccountRepository" as repository
+database DB as db
+
+
+user -> test+
+test -> account+ : new
+account --> test- : Account
+test -> test : パスワード暗号化
+test -> service+ : addAccount\n(Account)
+service -> repository+ : insert(Account)
+repository -> db+ : (SQL)INSERT
+db --> repository- : void
+repository --> service- : void
+service --> test- : void
+test --> user- : テスト結果確認
+@enduml

@@ -41,6 +41,8 @@ Spring Security関連の依存関係を追加します。
 
 ![](img/spring-security-add-account-sequence.png)
 
+[このシーケンスのplantumlはこちら](img/sprinng-security-add-account-sequence-plantuml.png)
+
 ### Entityの実装
 
 DBのアカウントとアカウント権限テーブルに合わせたEntityクラスを実装します。
@@ -136,6 +138,8 @@ psqlなどDBを操作するツールを使いaccountテーブルにレコード�
 - ユーザはメニュー画面に遷移します。
 
 ![](img/spring-security-sequence.png)
+
+[このシーケンス図のplantumlはこちら](img/spring-security-sequence-plantuml.png)
 
 ### AccountReposirotyの更新
 

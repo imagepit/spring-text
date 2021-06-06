@@ -10,6 +10,8 @@
 
 ![](img/springmvc-service-sequence.png)
 
+[このシーケンス図のplantumlはこちら](img/springmvc-3layer-archtecture-sequence-plantuml.png)
+
 ## ItemFormの修正
 
 DBの`item`テーブルの仕様と合わすべく、`ItemForm`のフィールド名を修正、追加しています。
