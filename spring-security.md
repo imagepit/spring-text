@@ -151,7 +151,7 @@ _src/main/resource/com/example/demo/repository/AccountRepository.xml_
 
 ### UserDetailssインターフェース実装クラスの実装
 
-DBから`AccountRepository`で取得した`Account`インスタンスをSpring Security本体で認証できるように`UserDetails`インターフェースを実装した`AccountUserDetails`クラスを実装します。
+DBから`AccountRepository`で取得した`Account`インスタンスをSpring Security本体で認証できるように`UserDetails`インターフェースを実装した`AccountUserDetails`クラスに変換するためのクラスを実装します。
 
 - ユーザアカウント情報を保持するための`Account`のフィールドを追加します。
 - ユーザアカウント権限を保持するための`Collection<GrantedAuthority>`のフィールドを追加します。
@@ -174,11 +174,14 @@ DBから`AccountRepository`で取得した`Account`インスタンスをSpring S
 
 ![](img/spring-security-15.png)
 
-### UserDetailServiceインターフェース実装クラスの実装
+### UserDetailsServiceインターフェース実装クラスの実装
 
-Spring Security本体から呼ばれ、`AccountRepository`にて`Account`インスタンスを受け取り、`AccountUserDetails`インスタンスに変換させるサービスクラス`AccountUserDetails`クラスを実装します。
+Spring Security本体から呼ばれ、`AccountRepository`にて`Account`インスタンスを受け取り、`AccountUserDetails`インスタンスに変換させるサービスクラス`AccountUserDetailsService`クラスを実装します。
 
-- `AccountUserDetails`をインスタンス化するための権限情報`authorities`をセットするために`getAuthorise`のprivateなメソッドを定義し、その中で`Account`の中の`AccountRole`の権限名をswitch-case文で条件分岐して`AuthrityUtils`の`createAuthorityList`のスタティックメソッドを使ってSpring Securityが認識できる権限に変換しています。
+- `AccountRepository`インターフェースのフィールドを用意してDIします。
+- `getAuthorise`のprivateなメソッドを定義します。
+  - `AccountUserDetails`をインスタンス化するための権限情報`authorities`をDBからの権限情報をもとにセットするためです。
+  - その中で`Account`の中の`AccountRole`の権限名を`switch-case`文で条件分岐して`AuthrityUtils`の`createAuthorityList`のスタティックメソッドを使ってSpring Securityが認識できる権限に変換しています。
 
 ![](img/spring-security-16.png)
 
