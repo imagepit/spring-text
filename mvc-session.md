@@ -78,6 +78,19 @@
 
 ![](img/springmvc-session-11.png)
 
+### PRGパターンとFlashスコープを使い完了画面へフォーム内容を送る
+
+PRGパターンのリダイレクト時にFormの内容をリダイレクト先にリクエストスコープで送る方法を紹介します。
+
+- `execute`のハンドラメソッドを追加し、`RedirectAttribute`の引数を追加します。
+  - その引数の`addFrashAttribute`メソッドの中にフォーム内容をセットすることによりリダイレクト先にデータをリクエストスコープで送ることができます。
+
+![](img/spring-session-flash.png)
+
+確認画面のPOST送信先を`/session/complete`から`session/execute`に変更します。
+
+![](img/spring-session-flash-view.png)
+
 ## 演習問題
 
 下記の仕様の計算画面を構築せよ。
