@@ -238,6 +238,7 @@ _src/main/resources/templates/login.html_
 - `sec:authentication="principal.username"`にて認証しているユーザ名を出力できます。
 - `sec:authorize="hasRole('GUEST')"`などの指定によりユーザアカウント権限毎にHTML要素を出し分ける事ができます。
 - ログアウトボタンは`form`タグでPOST通信で`th:action="@{/logout}"`でSpring Securityに送信しログアウトできます。
+  - `th:action`にてform送信先を指定しないとCSRFトークンが生成されないのでログアウト処理が正常にいきません。
 
 _src/main/resources/templates/menu.html_
 
