@@ -16,7 +16,9 @@
 
 ## エラー画面の作成
 
-Spring Framework（MVC）から出力されているから独自の画面に変更したい場合は`src/main/resources/template`の直下に`error.html`を配置します。これによりSpring Frameworkからだすエラーではなく、任意に実装したViewを表示することができます。
+Spring Framework（MVC）から出力されているものから独自の画面に変更したい場合は`src/main/resources/template`の直下に`error.html`を配置します。
+
+これによりSpring Frameworkからだすエラー画面ではなく、任意に実装したViewを表示することができます。
 
 ![](img/exception-02.png)
 
@@ -60,5 +62,7 @@ Spring Bootアプリケーション実行後で発生した例外を一つのク
 ### 動作確認
 
 それでは例外が発生した場合に`exception.html`をViewが表示される事を確認してください。
+
+**一般的には本番のサイトでスタックトレース内容をHTMLの画面に表示することもセキュリティ上好ましくないので、実際の開発の場合はログに出力するなどしてください。**
 
 ![](img/exception-05.png)
