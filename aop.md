@@ -39,3 +39,6 @@ AOPが処理前後に処理する対象のクラスである`com.example.demo.di
 `CalculatorTest`を実行すると下記のログが出力されることを確認してください。
 
 ![](img/aop-practice-03.png)
+
+## 補足
+

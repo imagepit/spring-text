@@ -10,6 +10,8 @@ Spring MVCでフォームを使ったリクエストパラメーターの取得�
 
 - このクラスを入力フォームのデータを入れます。
 - `@Data`を付与してゲッター、セッター、toStringを実装します。
+- `Serializable`インターフェースを実装します
+- 今回は`itemName`（商品名）と`itemPrice`（商品価格）のフィールドを定義します。
 
 ![](img/springmvc-form-03.png)
 

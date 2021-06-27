@@ -66,6 +66,10 @@ Modelにセットした商品カテゴリのコレクションを`select`タグ�
 
 ![](img/springmvc-service-05.png)
 
+**ラムダ式を使わないで実装した例**
+
+![](img/springmvc-service-05-no-lambda.png)
+
 ### Viewの修正
 
 コントローラーの修正に合わせてView（`confirm.html`）を修正します。

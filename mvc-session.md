@@ -16,12 +16,12 @@
 
 コントローラーのハンドラメソッドに合わせてViewを作成します。
 
-`templates`フォルダの中に`form`フォルダを作成して`form.html`を作成して入力画面を作成します。
+`templates`フォルダの中に`session`フォルダを作成して`form.html`を作成して入力画面を作成します。
 - [フォームの利用・確認](mvc-form.md)とほぼ同じです。
 
 ![](img/springmvc-session-02.png)
 
-`templates`フォルダの中に`complete`フォルダを作成して`form.html`を作成して入力画面を作成します。
+`templates/session`フォルダを作成して`confirm.html`を作成して入力画面を作成します。
 - [フォームの利用・確認](mvc-form.md)とほぼ同じです。
   - セッション内容が保持されているか確認するために「戻る」のリンクを追加しています。
 
@@ -90,6 +90,16 @@ PRGパターンのリダイレクト時にFormの内容をリダイレクト先�
 確認画面のPOST送信先を`/session/complete`から`session/execute`に変更します。
 
 ![](img/spring-session-flash-view.png)
+
+`complete.html`はFlashスコープの値を表示するように追加します。
+
+![](img/spring-session-flash-comple.png)
+
+### 動作確認
+
+完了画面まで表示させると商品名が表示されるようになります。
+
+![](img/spring-sessionn-flash-02.png)
 
 ## 演習問題
 
