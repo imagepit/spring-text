@@ -53,10 +53,10 @@
 
 ### 環境構築
 
-- [Gitの環境構築（NotePM）](https://fullness.notepm.jp/page/7e5c0b0c53)
-- [MonoSnapのインストール（NotePM）](https://fullness.notepm.jp/page/ce6ba893dc)
-- [eclipseの設定変更※任意（NotePM）](https://fullness.notepm.jp/page/6764506150)
-- [eclipseにplantumlプラグインのインストール](https://fullness.notepm.jp/page/15e3998722)
+- [Git・Github環境構築](git-setup.md)
+- [MonoSnap環境構築](monosnap-setup.md)
+- [eclipseおすすめ設定](eclipse-osusume.md)
+- [eclipseにplantumlプラグインのインストール](eclipse-plantuml.md)
 - [eclipseにlombok.jarの登録](eclipse-lombok-install.md)
 - [eclipseにSpring Bootプロジェクト作成](new-spring-project.md)
 
