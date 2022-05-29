@@ -67,7 +67,7 @@
 ![](img/di-usage-interface-depend-08.png)
 
 - この状態でテストを実行するとまた`UnsatisfiedDependencyException`が発生してテストに失敗します。
-  - これは`Calculator`インターフェースを実装した2のクラスに`@Component`アノテーションを付与した事によりどちらの実装クラスをDIすべきか判断できなくなったためです。
+  - これは`Calculator`インターフェースを実装した2つのクラスに`@Component`アノテーションを付与した事によりどちらの実装クラスをDIすべきか判断できなくなったためです。
 
 ![](img/di-usage-interface-depend-09.png)
 
