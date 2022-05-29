@@ -4,11 +4,10 @@
 
 ### セッションを使ったフォーム入力・確認画面の実装
 
-`controller`パッケージの中に`SessionController.java`のクラスを作成します。
-
-- コントローラーの内容は[フォームの利用・確認](mvc-form.md)とほぼ同じです。
-  - 違う箇所としては下図矢印の部分の`@SessionAttributes`でセッションスコープにしたいオブジェクトの属性名を指定している箇所です
-    - これによりItemFormオブジェクトがセッションスコープになります
+- `controller`パッケージの中に`SessionController.java`のクラスを作成します。
+  - コントローラーの内容は[フォームの利用・確認](mvc-form.md)とほぼ同じです。
+    - 違う箇所としては下図矢印の部分の`@SessionAttributes`でセッションスコープにしたいオブジェクトの属性名を指定している箇所です
+      - これによりItemFormオブジェクトがセッションスコープになります
 
 ![](img/springmvc-session-01.png)
 
@@ -101,116 +100,60 @@
 
 ## 演習問題
 
-- 下記の仕様の計算画面を構築せよ。
+- 下図のような足し算アプリになるようにFormクラス、Controllerクラス・ハンドラメソッド・Viewを作成しなさい。
+  - 入力画面で2つの整数値を入力
+  - 結果画面で2つの整数値を足し合わせた値を出力
+- また結果画面では次のようにセッションを制御してください。
+  - 「セッションを解除しないで戻る」ボタンをクリックした場合は入力画面にて入力した内容が保持されるようにしてください
+  - 「セッションを解除して戻る」ボタンをクリックした場合は入力画面にて入力した内容が破棄されるようにしてください
 
-![](img/springmvc-session-12.png)
+_入力画面_
+
+![](img/springmvc-practice03-01.png)
+
+_結果画面_
+
+![](img/springmvc-practice03-02.png)
+
+_「セッションを解除しないで戻る」ボタンをクリック時の入力画面_
+
+![](img/springmvc-practice03-01.png)
+
+_「セッションを解除して戻る」ボタンをクリック時の入力画面_
+
+![](img/springmvc-practice03-03.png)
+
+__
+
+|クラス名（FQCN）|アノテーション|
+|---|---|
+|`com.example.demo.controller.Practice03Controller`|`@RequestMapping("practice02")`
+|`com.example.demo.form.Practice03Form`|`@Data`
+
+_Practice02Controllerのハンドラメソッド_
+
+画面名|メソッド名|アノテーション|戻り値
+---|---|---|---
+入力画面<br>http://localhost:8080/practice03|form|`@GetMapping`|practice03/form
+結果画面<br>http://localhost:8080/practice03|result|`@PostMapping`|practice03/result
+「セッションを解除しないで戻る」ボタンをクリック時<br>http://localhost:8080/practice03/retain|retain|`@PostMapping`|redirect:/practice03
+「セッションを解除して戻る」ボタンをクリック時<br>http://localhost:8080/practice03/clear|clear|`@PostMapping`|redirect:/practice03
+
 
 ### 演習解答例
 
-_com.example.demo.form.CalcForm.java_
+_com.example.demo.form.Practice03Form.java_
 
-```java
-package com.example.demo.form;
+![](img/springmvc-practice03-a1.png)
 
-import java.io.Serializable;
+_com.example.demo.controller.Practice03Controller.java_
 
-import lombok.Data;
+![](img/springmvc-practice03-a2.png)
 
-@Data
-public class CalcForm implements Serializable {
-	private Integer value1;
-	private Integer value2;
-}
-```
+_src/main/resources/templates/practice03/form.html_
 
-_com.example.demo.controller.Practice02Controller.java_
+![](img/springmvc-practice03-a3.png)
 
-```java
-package com.example.demo.controller;
+_src/main/resources/templates/practice03/result.html_
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
-
-import com.example.demo.form.CalcForm;
-
-@SessionAttributes("calcForm")
-@RequestMapping("practice02")
-@Controller
-public class Practice02Controller {
-	@ModelAttribute("calcForm")
-	public CalcForm setup() {
-		return new CalcForm();
-	}
-
-	@GetMapping
-	public String form() {
-		return "practice02/form";
-	}
-
-	@PostMapping
-	public String confirm(@ModelAttribute("calcForm") CalcForm form, Model model) {
-		model.addAttribute("result",form.getValue1()+form.getValue2());
-		return "practice02/confirm";
-	}
-
-	@PostMapping("retain")
-	public String retain() {
-		return "redirect:/practice02";
-	}
-
-	@PostMapping("clear")
-	public String clear(SessionStatus sessionStatus) {
-		sessionStatus.setComplete();
-		return "redirect:/practice02";
-	}
-}
-```
-
-_src/main/resources/templates/practice02/form.html_
-
-```html
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>入力画面</title>
-</head>
-<body>
-	<h1>入力画面</h1>
-	<form action="/practice02" method="post" th:object="${calcForm}">
-		<input type="number" th:field="*{value1}" />
-		+
-		<input type="number" th:field="*{value2}" /><br>
-		<input type="submit" value="計算" />
-	</form>
-</body>
-</html>
-```
-
-_src/main/resources/templates/practice02/confirm.html_
-
-```html
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>計算結果</title>
-</head>
-<body>
-	<h1>計算結果</h1>
-	<p>答え=<span th:text="${result}"></span></p>
-	<form action="/practice02/retain" method="post">
-		<input type="submit" value="セッションを解除しないで戻る" />
-	</form>
-	<form action="/practice02/clear" method="post">
-		<input type="submit" value="セッションを解除して戻る" />
-	</form>
-</body>
-</html>
-```
+![](img/springmvc-practice03-a4.png)

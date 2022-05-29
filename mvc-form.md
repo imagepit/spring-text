@@ -60,7 +60,7 @@ Spring MVCでフォームを使ったリクエストパラメーターの取得�
 
 ### 動作確認
 
-ブラウザで`http://localhost:8080/form/input`動作確認してフォームで入力された値が確認画面で表示されるか確認
+ブラウザで`http://localhost:8080/form/input`動作確認してフォームで入力された値が結果画面で表示されるか確認してください。
 
 ![](img/springmvc-form-05.png)
 
@@ -92,7 +92,7 @@ _Practice02Controllerのハンドラメソッド_
 画面名|メソッド名|アノテーション|戻り値
 ---|---|---|---
 入力画面<br>http://localhost:8080/practice02/form|form|`@GetMapping`|practice02/form
-確認画面<br>http://localhost:8080/practice02/result|result|`@PostMapping`|practice02/result
+結果画面<br>http://localhost:8080/practice02/result|result|`@PostMapping`|practice02/result
 
 ### 解答例
 
