@@ -105,7 +105,7 @@ _リダイレクト先のURLへリダイレクト_
 トップ画面<br>http://localhost:8080/practice01|home|`@GetMapping`|practice01/home
 フォワード1画面<br>http://localhost:8080/practice01/forward|forward|`@GetMapping("forward")`|practice01/first
 フォワード2画面<br>http://localhost:8080/practice01/second|second|`@GetMapping("second")`|practice01/second
-リダイレクト<br>http://localhost:8080/practice01/redirect|redirect|`@GetMapping("redirect")`|redirect:/practice01/redirect
+リダイレクト<br>http://localhost:8080/practice01/redirect|third|`@GetMapping("redirect")`|redirect:/practice01/redirect
 リダイレクト画面<br>http://localhost:8080/practice01/third|third|`@GetMapping("third")`|practice01/third
 
 ### 解答例
