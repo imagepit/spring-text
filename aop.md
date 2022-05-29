@@ -41,7 +41,7 @@
   - 「開始」および「終了」の後ろに「クラス名.メソッド名()」が出力される。
     - `jointPoint.getSignature().toShortString()`で出力している。
 
-![](aop-practice-04.png)
+![](img/aop-practice-04.png)
 
 ### 解答例
 

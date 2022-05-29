@@ -98,12 +98,34 @@ _リダイレクト先のURLへリダイレクト_
 
 クラス名（FQCN）|アノテーション
 ---|---
-`com.example.demo.controller.Practice01Controller`|`@Controller`、`@RequestMapping`
+`com.example.demo.controller.Practice01Controller`|`@Controller`、`@RequestMapping('practice01')`
 
-画面名|メソッド名|アノテーション|戻り値
+画面名<br>URL|メソッド名|アノテーション|戻り値（View）
 ---|---|---|---
-トップ画面|home|`@GetMapping`|practice01/home
-フォワード1画面|forward|`@GetMapping("forward")`|practice01/first
-フォワード2画面|second|`@GetMapping("second")`|practice01/second
-リダイレクト|redirect|`@GetMapping("redirect")`|redirect:/practice01/redirect
-リダイレクト画面|redirected|`@GetMapping("redirected")`|practice01/redirected
+トップ画面<br>http://localhost:8080/practice01|home|`@GetMapping`|practice01/home
+フォワード1画面<br>http://localhost:8080/practice01/forward|forward|`@GetMapping("forward")`|practice01/first
+フォワード2画面<br>http://localhost:8080/practice01/second|second|`@GetMapping("second")`|practice01/second
+リダイレクト<br>http://localhost:8080/practice01/redirect|redirect|`@GetMapping("redirect")`|redirect:/practice01/redirect
+リダイレクト画面<br>http://localhost:8080/practice01/third|third|`@GetMapping("third")`|practice01/third
+
+### 解答例
+
+_com.example.demo.controller.Practice01Controller.java_
+
+![](img/springmvc-practice-01-a1.png)
+
+_src/main/resources/templates/practice01/home.html_
+
+![](img/springmvc-practice-01-a2.png)
+
+_src/main/resources/templates/practice01/first.html_
+
+![](img/springmvc-practice-01-a3.png)
+
+_src/main/resources/templates/practice01/second.html_
+
+![](img/springmvc-practice-01-a4.png)
+
+_src/main/resources/templates/practice01/third.html_
+
+![](img/springmvc-practice-01-a5.png)
