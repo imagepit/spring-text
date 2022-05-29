@@ -37,6 +37,13 @@
 ### 出力結果
 
 - `CalculatorTest`を実行すると下記のログが出力されることを確認してください。
+  - 次のようにテストケース実行毎にログ形式でコンソール出力される。
+  - 「開始」および「終了」の後ろに「クラス名.メソッド名()」が出力される。
+    - `jointPoint.getSignature().toShortString()`で出力している。
+
+![](aop-practice-04.png)
+
+### 解答例
 
 ![](img/aop-practice-03.png)
 
