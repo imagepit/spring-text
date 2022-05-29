@@ -57,6 +57,7 @@
 - [MonoSnap環境構築](monosnap-setup.md)
 - [eclipseおすすめ設定](eclipse-osusume.md)
 - [eclipseにplantumlプラグインのインストール](eclipse-plantuml.md)
+- [eclipseにEmmetプラグインの追加](https://blog.goo.ne.jp/siyokuanjin/e/43764761c736fe29f9a13cec6312e7be)
 - [eclipseにlombok.jarの登録](eclipse-lombok-install.md)
 - [eclipseにSpring Bootプロジェクト作成](new-spring-project.md)
 
