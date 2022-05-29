@@ -43,3 +43,6 @@ Spring Bootのプロジェクトが作成されました。
 しばらくすると下図のように「Spring」のアスキーアートが表示されればSpring Bootが起動している事が確認できます。
 
 ![](img/hello-spring-new-project-10.png)
+
+## Spring Bootプロジェクトの構成
+
