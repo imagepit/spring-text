@@ -123,8 +123,6 @@ _「セッションを解除して戻る」ボタンをクリック時の入力�
 
 ![](img/springmvc-practice03-03.png)
 
-__
-
 |クラス名（FQCN）|アノテーション|
 |---|---|
 |`com.example.demo.controller.Practice03Controller`|`@RequestMapping("practice02")`
