@@ -10,8 +10,6 @@
 
 ![](img/springmvc-service-sequence.png)
 
-[このシーケンス図のplantumlはこちら](img/springmvc-3layer-archtecture-sequence-plantuml.png)
-
 ## ItemFormの修正
 
 DBの`item`テーブルの仕様と合わすべく、`ItemForm`のフィールド名を修正、追加しています。
@@ -97,9 +95,14 @@ Modelにセットした商品カテゴリのコレクションを`select`タグ�
 
 ### Serviceインターフェース実装クラスの実装
 
-`ItemService`インターフェースを実装した`ItemServiceImpl.java`クラスを`com.example.demo.service`パッケージに作成します。
-- このクラスにて`ItemRepository`インターフェースのフィールドを用意してDIします。
-- `addItem`メソッドをオーバーライドして`Item`のEntity引数を使って`ItemRepository`の`insert`メソッドの引数にセットしてDBへINSERT処理を行います。
+- `ItemService`インターフェースを実装した`ItemServiceImpl.java`クラスを`com.example.demo.service`パッケージに作成します。
+  - `@Service`アノテーションをクラスの上に指定します。
+    - これでこのクラスはDI対象になります。
+  - `@Transactional`アノテーションをクラスの上に指定します。
+    - これでこのサービスクラスの全てのメソッドにおいてトランザクション処理を行なってくれます。
+      - 手動コミットモードに切り替わり、更新系のSQL実行時に成功したときにはコミット、失敗した場合にはロールバックされます。
+  - このクラスにて`ItemRepository`インターフェースのフィールドを用意してDIします。
+  - `addItem`メソッドをオーバーライドして`Item`のEntity引数を使って`ItemRepository`の`insert`メソッドの引数にセットしてDBへINSERT処理を行います。
 
 ![](img/springmvc-service-08.png)
 

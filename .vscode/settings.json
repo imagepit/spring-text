@@ -1,0 +1,6 @@
+{
+    "pasteImage.path": "${projectRoot}/img"
+    ,"markdown.styles": [
+        "style.css"
+    ]
+}

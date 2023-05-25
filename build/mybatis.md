@@ -1,12 +1,90 @@
-# mybatisの動作確認・演習
+# Mybatis基本
 
 ## 環境構築
 
 ### PostgreSQLにDB、テーブル追加
 
 - 下記のSQLを`psql`を使ってPostgreSQLにユーザ（ロール）、DB、テーブルを登録してください。
-  - [DB、ロール作成用SQL](sql/create_user.sql)
-  - [テーブル作成用SQL](sql/create_table.sql)
+
+**[DB、ロール作成用SQL]**
+
+```sql
+create user sboottext with password 'sboottext';
+create database sboottext owner sboottext;
+```
+
+**[テーブル作成用SQL]**
+
+```sql
+drop table if exists item;
+drop table if exists item_category;
+drop table if exists employee;
+drop table if exists department;
+
+create table department(
+  dept_no serial primary key,
+  dept_name varchar(100)
+);
+
+create table employee(
+  emp_no serial primary key,
+  emp_name varchar(100),
+  dept_no integer references department(dept_no)
+);
+insert into department values(nextval('department_dept_no_seq'),'営業部');
+insert into department values(nextval('department_dept_no_seq'),'企画部');
+insert into department values(nextval('department_dept_no_seq'),'システム部');
+insert into employee values(nextval('employee_emp_no_seq'),'高橋',1);
+insert into employee values(nextval('employee_emp_no_seq'),'田中',2);
+insert into employee values(nextval('employee_emp_no_seq'),'加藤',3);
+
+create table item_category(
+  id serial primary key,
+  name character varying(20)
+);
+
+create table item(
+  id serial primary key,
+  name character varying(30),
+  price integer,
+  category_id integer references item_category(id)
+);
+
+/* 商品カテゴリ */
+insert into item_category values(nextval('item_category_id_seq'),'文房具');
+insert into item_category values(nextval('item_category_id_seq'),'雑貨');
+insert into item_category values(nextval('item_category_id_seq'),'パソコン周辺機器');
+
+/* 商品 */
+insert into item values(nextval('item_id_seq'),'水性ボールペン(黒)',120,1);
+insert into item values(nextval('item_id_seq'),'水性ボールペン(赤)',120,1);
+insert into item values(nextval('item_id_seq'),'水性ボールペン(青)',120,1);
+insert into item values(nextval('item_id_seq'),'油性ボールペン(黒)',100,1);
+insert into item values(nextval('item_id_seq'),'油性ボールペン(赤)',100,1);
+insert into item values(nextval('item_id_seq'),'油性ボールペン(青)',100,1);
+insert into item values(nextval('item_id_seq'),'蛍光ペン(黄)',130,1);
+insert into item values(nextval('item_id_seq'),'蛍光ペン(赤)',130,1);
+insert into item values(nextval('item_id_seq'),'蛍光ペン(青)',130,1);
+insert into item values(nextval('item_id_seq'),'蛍光ペン(緑)',130,1);
+insert into item values(nextval('item_id_seq'),'鉛筆(黒)',100,1);
+insert into item values(nextval('item_id_seq'),'鉛筆(赤)',100,1);
+insert into item values(nextval('item_id_seq'),'色鉛筆(12色)',400,1);
+insert into item values(nextval('item_id_seq'),'色鉛筆(48色)',1300,1);
+insert into item values(nextval('item_id_seq'),'レザーネックレス',300,2);
+insert into item values(nextval('item_id_seq'),'ワンタッチ開閉傘',3000,2);
+insert into item values(nextval('item_id_seq'),'金魚風呂敷',500,2);
+insert into item values(nextval('item_id_seq'),'折畳トートバッグ',600,2);
+insert into item values(nextval('item_id_seq'),'アイマスク',900,2);
+insert into item values(nextval('item_id_seq'),'防水スプレー',500,2);
+insert into item values(nextval('item_id_seq'),'キーホルダ',800,2);
+insert into item values(nextval('item_id_seq'),'ワイヤレスマウス',900,3);
+insert into item values(nextval('item_id_seq'),'ワイヤレストラックボール',1300,3);
+insert into item values(nextval('item_id_seq'),'有線光学式マウス',500,3);
+insert into item values(nextval('item_id_seq'),'光学式ゲーミングマウス',4800,3);
+insert into item values(nextval('item_id_seq'),'有線ゲーミングマウス',3800,3);
+insert into item values(nextval('item_id_seq'),'USB有線式キーボード',1400,3);
+insert into item values(nextval('item_id_seq'),'無線式キーボード',1900,3);
+```
 
 ### Mybatipseプラグインのインストール
 
@@ -113,6 +191,25 @@ spring.datasource.password: sboottext
 ```sql
 drop table if exists item;
 drop table if exists item_category;
+drop table if exists employee;
+drop table if exists department;
+
+create table department(
+  dept_no serial primary key,
+  dept_name varchar(100)
+);
+
+create table employee(
+  emp_no serial primary key,
+  emp_name varchar(100),
+  dept_no integer references department(dept_no)
+);
+insert into department values(nextval('department_dept_no_seq'),'営業部');
+insert into department values(nextval('department_dept_no_seq'),'企画部');
+insert into department values(nextval('department_dept_no_seq'),'システム部');
+insert into employee values(nextval('employee_emp_no_seq'),'高橋',1);
+insert into employee values(nextval('employee_emp_no_seq'),'田中',2);
+insert into employee values(nextval('employee_emp_no_seq'),'加藤',3);
 
 create table item_category(
   id serial primary key,
@@ -183,27 +280,57 @@ JUnitテストを実行すると下図のようにコンソールにDBテーブ�
 
 ### 1件取得
 
-- 上記とテキストを参考に`ItemRepository.java`と`ItemRepository.xml`を更新してItemテーブルのレコードをIDを指定して1件取得する処理を実装してください
-  - 取得の確認は`ItemRepositoryTest.java`にテストケースを作り確認してください。
+- 上記とテキストを参考に`ItemRepository.java`と`ItemRepository.xml`を更新してItemテーブルのレコードをIDを指定して1件取得する処理を実装してください。
+  - `ItemRepository`インターフェースには`Item selectById(Integer id)`の抽象メソッドを追加してください。
+  - 取得の確認は`ItemRepositoryTest.java`に`testSelectAll()`のテストケースを作り確認してください。
 
 ### 1件登録
 
-- 上記とテキストを参考に`ItemRepository.java`と`ItemRepository.xml`を更新してレコードを1件登録する処理を実装してください
+- 上記とテキストを参考に`ItemRepository.java`と`ItemRepository.xml`を更新してレコードを1件登録する処理を実装してください。
+  - `ItemRepository`インターフェースには`void insert(Item item)`の抽象メソッドを追加してください。
   - 登録の確認は`ItemRepositoryTest.java`にテストケースを作り確認してください。
   - 登録処理時のIDはPostgreSQLのシーケンスを使って登録してください（テキストの60ページ参照）
 
 ### 1件更新
 
-- 上記とテキストを参考に`ItemRepository.java`と`ItemRepository.xml`を更新してレコードを1件更新する処理を実装してください
-  - 更新の確認は`ItemRepositoryTest.java`にテストケースを作り確認してください。
+- 上記とテキストを参考に`ItemRepository.java`と`ItemRepository.xml`を更新してレコードを1件更新する処理を実装してください。
+  - `ItemRepository`インターフェースには`void update(Item item)`の抽象メソッドを追加してください。
+  - 更新の確認は`ItemRepositoryTest.java`に`testUpdate()`のテストケースを作り確認してください。
 
 ### 1件削除
 
 - 上記とテキストを参考に`ItemRepository.java`と`ItemRepository.xml`を更新してレコードを1件削除する処理を実装してください
-  - 削除の確認は`ItemRepositoryTest.java`にテストケースを作り確認してください。
+  - `ItemRepository`インターフェースには`void update(Item item)`の抽象メソッドを追加してください。
+  - 削除の確認は`ItemRepositoryTest.java`に`testUpdate()`のテストケースを作り確認してください。
+
+### 解答例
+
+_(src/main/java)com.example.demo.repository.ItemRepository.java_
+
+![](https://www.image-pit.com/sboot-text/img/mybatis-practice-a-01.png)
+
+_(src/main/resource)/com/example/demo/repository/ItemRepository.xml_
+
+![](https://www.image-pit.com/sboot-text/img/mybatis-practice-a-02.png)
+
+_(src/test/java)com.example.demo.repository.ItemRepositoryTest.java_
+
+![](https://www.image-pit.com/sboot-text/img/mybatis-practice-a-03.png.png)
 
 ## 追加演習
 
-`src/main/resource/sql/data.sql`に下記を追加してMybatisを使って基本的なCRUDを実装してください。
+- `src/main/resource/sql/data.sql`に下記のテーブルに対して、Mybatisを使って基本的なCRUDを実装してください。
+  - `department`、`employee`に対応したEntityクラスを作成
+    - `Employee`クラス
+    - `Department`クラス
+  - `department`、`employee`に対応したMapperインターフェースの作成
+    - `EmployeeRepositoy.java`インターフェース
+    - `DepartmentRepository.java`インターフェース
+  - `department`、`employee`に対応したMapperXMLの作成
+    - `EmployeeRepositoy.xml`
+    - `DepartmentRepository.xml`
+  - テストクラスの作成
+    - `EmployeeRepositoyTest`クラス
+    - `DepartmentRepositoryTest`クラス
 
 ![](https://www.image-pit.com/sboot-text/img/mybatis-11.png)

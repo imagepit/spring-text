@@ -1,4 +1,4 @@
-# SpringMVC基本
+# Spring MVC
 
 ## 環境構築
 

@@ -7,7 +7,7 @@
 - 「Java」->「エディタ」->「コンテンツアシスト」を選択
 - 「Javaの自動有効化トリガー」に`.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_`を入れる
 
-![](https://www.evernote.com/l/AB3G4MIsoIpAsrfjKoj1L9M01TsRSHvU10cB/image.png)
+![](https://www.image-pit.com/sboot-text/https://www.evernote.com/l/AB3G4MIsoIpAsrfjKoj1L9M01TsRSHvU10cB/image.png)
 
 ## ショートカットの調整
 
@@ -15,4 +15,4 @@
 - 「一般」->「キー」を選択
 - 「実行」の文字列で検索して「Javaアプリケーションの実行」のショートカットを変更（ctrl + rがおすすめ）
 
-![](https://www.evernote.com/l/AB2ASzwgVPZIxKvcY8IaLML_k28pled5Q60B/image.png)
+![](https://www.image-pit.com/sboot-text/https://www.evernote.com/l/AB2ASzwgVPZIxKvcY8IaLML_k28pled5Q60B/image.png)

@@ -1,39 +1,40 @@
-# 相関バリデーションの確認
+# 相関バリデートの確認
 
 ## 動作の確認
 
 ### Validatorインターフェース実装クラスの追加
 
-`org.springframework.validation.Validator`インターフェースを実装したクラス`ItemFormValidator`クラスを`form`パッケージに追加します。
-
-- `Validator`インターフェースを実装することにより継承しなければいけないメソッドをオーバーライドします。
-  - `supports`メソッドにて相関バリデーションする対象のクラスを登録しています。
-  - `validate`メソッドにて相関バリデーションの条件を実装します。
-    - このメソッドの`target`引数に入力チェック時のFromオブジェクトのフィールドの値が取得できます。
-    - target引数はObject型なのでダウンキャストしてItemForm型にしています
-    - if文にて条件Formオブジェクトの複数のフィールドを条件に相関バリデーションを表現し、エラー時は`errors`引数の`reject`メソッドを実行することによりエラー内容をエラー結果として登録します。
-      - 今回は「商品名が"パソコン"で価格が1000円未満」はエラーとする条件をいれています。
-      - `reject`メソッドの引数は`messages.properties`の中にあるメッセージの値のキー名を指定します。
+- `org.springframework.validation.Validator`インターフェースを実装したクラス`ItemFormValidator`クラスを`form`パッケージに追加します。
+  - DI対象にしたいので`@Component`をクラス名の上に追加します。
+  - `Validator`インターフェースを実装することにより継承しなければいけないメソッドをオーバーライドします。
+    - `supports`メソッドにて相関バリデートする対象のクラス（今回はItemForm）を登録しています。
+    - `validate`メソッドにて相関バリデートの条件を実装します。
+      - このメソッドの`target`引数に入力チェック時のFromオブジェクトのフィールドの値が取得できます。
+      - target引数はObject型なのでダウンキャストしてItemForm型にしています
+      - if文にて条件Formオブジェクトの複数のフィールドを条件に相関バリデートを表現し、エラー時は`errors`引数の`reject`メソッドを実行することによりエラー内容をエラー結果として登録します。
+        - 今回は「商品名が"パソコン"で価格が1000円未満」はエラーとする条件をいれています。
+        - `reject`メソッドの引数は`messages.properties`の中にあるメッセージの値のキー名を指定します。
 
 ![](https://www.image-pit.com/sboot-text/img/mvc-validator-multi-01.png)
 
 ### メッセージ内容の定義
 
-Validatorクラスで実装した`reject`メソッドの引数の値のキーをもつメッセージを定義します。
+- Validatorクラスで実装した`reject`メソッドの引数の値のキーをもつメッセージを定義します。
+- メッセージのキー名の部分は`ItemFormValidator`クラスの`validate`メソッドで追加した`errors.reject`メソッドの引数の値と合わせます。
 
 ![](https://www.image-pit.com/sboot-text/img/mvc-validator-multi-03.png)
 
 ### ControllerにFormValidatorクラスを登録
 
-Validatorクラスを対象のコントローラーで利用するFormを利用するための処理を`SessionController`に追加します。
-- ItemVaildatorの変数を用意し`@Autowired`でインジェクションします。
-- `@InitBinder`アノテーションを付与したメソッドを追加します。
-  - `@InitBinder`の引数にはこのコントローラーで利用しているFormオブジェクトのModelAttribute名を指定します。
-  - メソッド引数の`WebDetaBinder`引数の`addValidator`メソッドでインジェクションするItemVaildatorの変数をセットします。
+- Validatorクラスを対象のコントローラーで利用するFormを利用するための処理を`SessionController`に追加します。
+  - ItemVaildatorの変数を用意し`@Autowired`でインジェクションします。
+  - `@InitBinder`アノテーションを付与したメソッドを追加します。
+    - `@InitBinder`の引数にはこのコントローラーで利用しているFormオブジェクトのModelAttribute名を指定します。
+    - メソッド引数の`WebDetaBinder`引数の`addValidator`メソッドでインジェクションするItemVaildatorの変数をセットします。
 
 ![](https://www.image-pit.com/sboot-text/img/mvc-validator-multi-02.png)
 
-これで相関バリデーションの実装は完了です。
+これで相関バリデートの実装は完了です。
 
 ### 動作の確認
 

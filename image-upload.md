@@ -61,7 +61,7 @@ Spring MVCにてブラウザから画像をアップロードしてサーバに�
 
 確認画面では選択した画像が次のように表示される事を確認してください。
 
-![](image-upload-12.png)
+![](img/image-upload-12.png)
 
 Chromeのデベロッパーツールなどで、画像がファイルでなくBase64エンコードされた文字列によって表示されている事が確認できます。
 
@@ -71,9 +71,9 @@ Chromeのデベロッパーツールなどで、画像がファイルでなくBa
 
 ### Helperクラスの更新
 
-画像ファイルをサーバーにアップロードするための処理を`UploadImageHelper`クラスに追加します。
+画像ファイルをサーバーにアップロードするための処理を`ImageUploadHelper`クラスに追加します。
 - `uploadFile`メソッドを追加します。
-  - 引数には保存に必要な画像ファイルのバイト列を指定しています。
+  - 引数には保存に必要な、ファイル名と画像ファイルのバイト列を指定しています。
   - `uuidFileName`のローカル変数ではUUIDを使い、ユニークになるファイル名を生成しています。
   - `filePath`のローカル変数には`src/main/webapp/img`に`uuidFileName`を連結した保存先のパスを生成しています。
     - Spring Bootでは`src/main/webapp`配下に画像などを保存すればサーバに公開されるようになります。
@@ -89,14 +89,14 @@ Chromeのデベロッパーツールなどで、画像がファイルでなくBa
 
 ### コントローラーの更新（完了画面にて画像をサーバに保存）
 
-完了画面用のハンドラメソッドを`ImageUploadController`に追加します。
-- このハンドラメソッドで`UploadImageHelper`の`uploadFile`メソッドを実行してサーバにファイルを保存し、保存先の文字列をModelのAttributeに`imageUrl`のキー名で格納しています。
+- 完了画面用のハンドラメソッドを`ImageUploadController`に追加します。
+- このハンドラメソッドで`ImageUploadHelper`の`uploadFile`メソッドを実行してサーバにファイルを保存し、保存先の文字列をModelのAttributeに`imageUrl`のキー名で格納しています。
 
 ![](img/image-upload-06.png)
 
 ### Viewの作成（完了画面）
 
-完了画面のViewを作成します。
+- 完了画面のViewを作成します。
 - `templates/image`フォルダに`complete.html`を作成します。
   - `src/main/webapp/img`フォルダに保存した画像ファイルは`http://localhost:8080/img/<画像ファイル名>`でアクセスできます。
   - `img`タグの`th:src`属性にてModeのAttributeの`imageUrl`をパスに連結しています。

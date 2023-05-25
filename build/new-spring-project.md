@@ -46,3 +46,62 @@ Spring Bootのプロジェクトが作成されました。
 
 ## Spring Bootプロジェクトの構成
 
+- Spring BootプロジェクトはGradleを利用したアプリケーションプロジェクトを作成することができる。
+- Gradleだけでなくビルドツールで作成したアプリケーションプロジェクトは以下の構成になる。
+
+![](https://www.image-pit.com/sboot-text/img/gradle-project-structure-01.png)
+
+### Gradleプロジェクトの基本構成
+
+No|説明
+---|---
+①|パッケージを作成し、アプリケーションを構成するクラスやインターフェースを配備する場所
+②|アプリケーションや API から読み取る情報を定義したファイルを配備する場所<br>ファイルには XML ファイル、JSON ファイル、YAML ファイル、プロパティファイルなどがある
+③|JUnit を利用した単体・結合テストドライバを配備する場所
+④|テストドライバで利用する外部ファイルを配備する場所
+⑤|Repository から取得した API のリンクを配備される場所
+⑥|プロジェクトに対する環境、API、ビルド方法などを定義するファイル
+
+### build.gradle(ビルド定義ファイル)
+
+- build.gradleにはコンパイルに利用するJDKのバージョンや、利用するAPIやプラグインなどの定義をGroovyまたはKotlinを利用して定義していく。
+
+```groovy
+// プロジェクト全体で利用するプラグイン機能
+plugins {
+	id 'org.springframework.boot' version '2.6.6'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+// プロジェクトグループパッケージ
+group = 'com.example'
+// プロジェクトバージョン
+version = '0.0.1-SNAPSHOT'
+// コンパイルするJDKのバージョン
+sourceCompatibility = '11'
+// プロジェクト設定
+configurations {
+	developmentOnly
+    runtimeClasspath {
+            extendsFrom developmentOnly
+    }
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+// プロジェクトで利用するライブラリの入手先
+repositories {
+	mavenCentral()
+}
+// 利用するライブラリ（依存関係）
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+```
+
+

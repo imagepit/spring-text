@@ -16,19 +16,16 @@
 
 ## エラー画面の作成
 
-Spring Framework（MVC）から出力されているものから独自の画面に変更したい場合は`src/main/resources/template`の直下に`error.html`を配置します。
-
-これによりSpring Frameworkからだすエラー画面ではなく、任意に実装したViewを表示することができます。
+- Spring Framework（MVC）から出力されているものから独自の画面に変更したい場合は`src/main/resources/templates`の直下に`error.html`を配置します。
+- これによりSpring Frameworkからだすエラー画面ではなく、任意に実装したViewを表示することができます。
 
 ![](https://www.image-pit.com/sboot-text/img/exception-02.png)
 
 ### 動作の確認
 
-それでは意図的に例外を発生させます。`http://localhost:8080/exception`にアクセスして下図の画面を表示する事を確認してください。
-
-これでSpring Frameworkから出力されるメッセージは隠蔽できます。
-
-**もし、このエラー画面を出し続ける場合にはこれ以降は問題発生時はコンソールを見て問題解決してください。（納品直前までこのhtmlはつくらなくてもいいかもしれませんね。）**
+- それでは意図的に例外を発生させます。`http://localhost:8080/exception`にアクセスして下図の画面を表示する事を確認してください。
+- これでSpring Frameworkから出力されるメッセージは隠蔽できます。
+- **もし、このエラー画面を出し続ける場合にはこれ以降は問題発生時はコンソールを見て問題解決してください。（納品直前までこのhtmlはつくらなくてもいいかもしれませんね。）**
 
 ![](https://www.image-pit.com/sboot-text/img/exception-13.png)
 
@@ -36,7 +33,7 @@ Spring Framework（MVC）から出力されているものから独自の画面�
 
 ### 全体の例外をキャッチするクラスの作成
 
-Spring Bootアプリケーション実行後で発生した例外を一つのクラスで受け取り、何か処理を加えてViewをかえしたい場合には`HandlerExceptionResolver`インターフェースを実装したクラスを作成します。
+- Spring Bootアプリケーション実行後で発生した例外を一つのクラスで受け取り、何か処理を加えてViewをかえしたい場合には`HandlerExceptionResolver`インターフェースを実装したクラスを作成します。
 - 今回は`GlobalExceptionHandler`という名前のクラスを`com.example.demo.exception`パッケージに作成しています。
 - `@Component`を付与してDI対象（Bean）にします。
 - `HandlerExceptionResolver`インターフェースをクラスに追加します。
@@ -53,16 +50,14 @@ Spring Bootアプリケーション実行後で発生した例外を一つのク
 
 ### Viewの作成
 
-`GlobalExceptionHandler`クラスから呼ばれるViewを作成します。
-
-`src/main/resources`直下の`exception.html`を作成して下図のとおり実装します。
+- `GlobalExceptionHandler`クラスから呼ばれるViewを作成します。
+- `src/main/resources`直下の`exception.html`を作成して下図のとおり実装します。
 
 ![](https://www.image-pit.com/sboot-text/img/exception-04.png)
 
 ### 動作確認
 
-それでは例外が発生した場合に`exception.html`をViewが表示される事を確認してください。
-
-**一般的には本番のサイトでスタックトレース内容をHTMLの画面に表示することもセキュリティ上好ましくないので、実際の開発の場合はログに出力するなどしてください。**
+- それでは例外が発生した場合に`exception.html`をViewが表示される事を確認してください。
+- **一般的には本番のサイトでスタックトレース内容をHTMLの画面に表示することもセキュリティ上好ましくないので、実際の開発の場合はログに出力するなどしてください。**
 
 ![](https://www.image-pit.com/sboot-text/img/exception-05.png)
